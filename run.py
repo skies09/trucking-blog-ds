@@ -1,8 +1,10 @@
 import os
+import json
 from flask import Flask, render_template, request, flash
 
 app = Flask(__name__)
 app.secret_key = 'some_secret'
+
 
 @app.route('/')
 def index():
@@ -14,6 +16,7 @@ def about():
     return render_template("about.html", page_title="About")
 
 
+
 @app.route('/contact', methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
@@ -21,6 +24,8 @@ def contact():
             request.form["name"]
         ))
     return render_template("contact.html", page_title="Contact")
+
+
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
